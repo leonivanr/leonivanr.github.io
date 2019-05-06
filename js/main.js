@@ -1,77 +1,106 @@
+var memberSenateArray = dataSenate.results[0].members;
+var memberHouseArray = dataHouse.results[0].members;
+
+//Crea por primera vez la tabla sin filtros.
 verifyPage();
+// Cuando cambia el estado de los checkboxes o del menú, renueva la tabla con los filtros.
+document.getElementById("checkboxes").addEventListener("change", () => {
+  const table = document.querySelector('table');
+  table.innerHTML = " ";
+  verifyPage();
+});
 
 // Verifica si es Senadores o Congreso, en base a eso, llama a la función createTable con sus respectivos datos.
 function verifyPage() {
-
-  if (document.getElementById("senate-table")) {
-    createTable("senate-table", filterTable(dataSenate.results[0].members));
-  } else {
-    createTable("house-table", filterTable(dataHouse.results[0].members));
-  }
+  const page = document.getElementById("senate-table") ? createTable("senate-table", filterTable(memberSenateArray)) : createTable("house-table", filterTable(memberHouseArray));
+  return page;
 }
-// Toma la tabla y la rellena con los campos tomados de la función addTableToHTML,
+
 function createTable(id, data) {
-  // Busco el elemento que tiene el id "senate-data" (tabla) y le pido que lo aloje en la variable "elSenateTable".
-  var elSenateTable = document.getElementById(id);
-  // Copio el contenido del array "members" en la variable tableElement.
-  tableElement = addTableToHTML(data);
-  //Actualizo el contenido de la tabla en el HTML
-  elSenateTable.innerHTML = tableElement;
-
-}
-// Recorre el array y crea el head y el body de la tabla.
-function addTableToHTML(membersArray) {
-
-  // Creo una variable que contenga las etiquetas con los titulos de cada columna de la tabla.
-  var elementHtml = '<thead class="thead-light"><tr><th> Name </th><th> Party Affiliation</th><th> State </th><th> Seniority </th><th> Percentage of votes with party </th></tr></thead>';
-  // Le agrego la etiqueta <tbody> al cuerpo de la tabla.
-  elementHtml += '<tbody>';
-  // Recorro el array "members", y por cada item, agrego una fila (<tr>) y las columnas que se necesitan.
-  membersArray.forEach(function (member) {
-    elementHtml += '<tr>';
-    if (member.middle_name === null) { // Si no tiene segundo nombre, solo agrega nombre y apellido.
-      elementHtml += '<td><a href="' + member.url + '">' + member.first_name + ' ' + member.last_name + '</td>';
-    } else { // De lo contrario, nombre, segundo nombre y apellido.
-      elementHtml += '<td><a href="' + member.url + '">' + member.first_name + ' ' + member.middle_name + ' ' + member.last_name + '</a></td>';
+  //Obtengo la tabla tabla
+  const table = document.getElementById(id);
+  //Crear head de la tabla.
+  const thead = table.createTHead();
+  thead.innerHTML = '<tr><th class="thead-light">Name</th><th>Party</th><th>State</th><th>Seniority</th><th>Votes</th></tr>';
+  //Crear body de la tabla.
+  const tbody = table.createTBody();
+  // Crear una fila por cada miembro.
+  data.forEach(miembro => {
+    const row = document.createElement('tr');
+    const nameM = document.createElement('td');
+    const stateM = document.createElement('td');
+    const partyM = document.createElement('td');
+    const votesM = document.createElement('td');
+    const seniorityM = document.createElement('td');
+    // Asignar valores.
+    // Controlar si tienen segundo nombre.
+    if (miembro.middle_name === null) {
+      nameM.textContent = `${miembro.first_name} ${miembro.last_name}`;
+    } else {
+      nameM.textContent = `${miembro.first_name} ${miembro.middle_name} ${miembro.last_name}`;
     }
-    elementHtml += '<td>' + member.party + '</td>';
-    elementHtml += '<td>' + member.state + '</td>';
-    elementHtml += '<td>' + member.seniority + '</td>';
-    elementHtml += '<td>' + member.votes_with_party_pct + ' % </td>';
-    elementHtml += '</tr>';
+    partyM.textContent = miembro.party;
+    stateM.textContent = miembro.state;
+        seniorityM.textContent = miembro.seniority;
+    votesM.textContent = `${miembro.votes_with_party_pct} %`;
+    //Insertar en la fila
+    row.appendChild(nameM);
+    row.appendChild(partyM);
+    row.appendChild(stateM);
+    row.appendChild(seniorityM);
+    row.appendChild(votesM);
+    //Insertar en el body de la tabla.
+    tbody.appendChild(row);
   });
-  elementHtml += '</tbody>';
-
-  return elementHtml;
 }
 // Filtra el array de miembros de acuerdo a los 3 checkboxes y el menú desplegable.
+
 function filterTable(members) {
-
-  var filters = [];
+  let filters = [];
   //Obtengo el item seleccionado del menú desplegable de estados.
-  var selectedState = document.getElementById("select-states").value;
+  const selectedState = document.getElementById("select-states").value;
 
-  for (var i = 0; i < members.length; i++) {
+  for (let i = 0; i < members.length; i++) {
     memberState = members[i].state;
     // Si el checkbox da verdadero, comprueba si hay algún estado seleccionado y la compara, después copia el elemento
     // en el array "filters".
-    if ((selectedState === "All" || selectedState === memberState) && (document.getElementById("check-independent").checked === true)) {
-      if (members[i].party === "I") {
-        filters.push(members[i]);
-      }
-    }
+
     if ((selectedState === "All" || selectedState === memberState) && (document.getElementById("check-republican").checked === true)) {
-      if (members[i].party === "R") {
+      if (members[i].party == "R") {
         filters.push(members[i]);
       }
     }
     if ((selectedState === "All" || selectedState === memberState) && (document.getElementById("check-democrat").checked === true)) {
-      if (members[i].party === "D") {
+      if (members[i].party == "D") {
         filters.push(members[i]);
       }
     }
-
+    if ((selectedState === "All" || selectedState === memberState) && (document.getElementById("check-independent").checked === true)) {
+      if (members[i].party == "I") {
+        filters.push(members[i]);
+      }
+    }
   }
   return filters;
 
 }
+
+/*////////////////////////////////////////
+// Forma más simple y ordenada de filtrar.
+////////////////////////////////////////*/
+/* function filterTable(array) {
+
+  let stateSelect = document.getElementById("select-states").value;
+  let checkeds = Array.from(document.querySelectorAll('input[type=checkbox]:checked')).map(element => element.value);
+  let items = [];
+  let aux = [];
+
+  checkeds.forEach(element => {
+    aux = [];
+    aux = array.filter(item => item.party === element && (item.state === stateSelect || stateSelect === "All"));
+    items.push.apply(items, aux);
+  })
+
+  return items;
+}
+ */
