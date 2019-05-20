@@ -1,4 +1,4 @@
-$("#gameCanvas").touchwipe({
+$("#container").touchwipe({
     wipeLeft: function () {
         alert("left");
     },
