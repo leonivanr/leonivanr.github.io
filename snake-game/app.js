@@ -1,28 +1,14 @@
-$("#container").touchwipe({
-    wipeLeft: function () {
-        alert("left");
-    },
-    wipeRight: function () {
-        alert("right");
-    },
-    wipeUp: function () {
-        alert("up");
-    },
-    wipeDown: function () {
-        alert("down");
-    },
-    min_move_x: 20,
-    min_move_y: 20,
-    preventDefaultEvents: true
-});
-
 // UI Colors
 const canvasBorderColor = 'darkgreen';
-const canvasBackgroundColor = 'orange';
+const canvasBackgroundColor = 'green';
 const snakeBorderColor = 'black';
 const snakeBackgroundColor = 'brown';
 const obtPuntaje = document.querySelector('#puntaje');
-const jugar = document.querySelector('#jugar');
+const jugarBtn = document.querySelector('.jugar');
+let cambiarVelocidad = false;
+// Velocidad inicial;
+let speed = 100;
+//Puntaje inicial.
 let puntaje = 0;
 // Definimos donde inicia la serpiente.
 let snake = [{
@@ -56,25 +42,35 @@ let dx = 10;
 let dy = 0;
 
 // Obtener canvas.
-var canvasGame = document.querySelector('#gameCanvas');
+const canvasGame = document.querySelector('#gameCanvas');
 
 // Setear a 2d.
-var canSnake = canvasGame.getContext('2d');
+var ctx = canvasGame.getContext('2d');
 
 //Seteamos el color.
-canSnake.fillStyle = canvasBackgroundColor;
+ctx.fillStyle = canvasBackgroundColor;
 // Seteamos el borde.
-canSnake.strokeStyle = canvasBorderColor;
+ctx.strokeStyle = canvasBorderColor;
 
-// Inicio del juego.
-
-// Genero comida para la primera vez. 
-
+// Iniciar con boton
+jugarBtn.addEventListener('click', iniciarJuego);
+// Iniciar con Enter
+window.addEventListener('keyup', function (e) {
+    if (e.keyCode === 13 || e.keyCode === 32) {
+        iniciarJuego();
+    }
+});
 // Escucho las teclas presionadas.
 addEventListener('keydown', cambiarDireccion);
+
 function main() {
-    if (colisionSerpiente()) return;
+    if (colisionSerpiente()) {
+        juegoAcabado();
+        return
+    };
+
     setTimeout(function onTick() {
+        cambiarVelocidad = false;
         limpiarLienzo();
         dibujarComida();
         moverSerpiente();
@@ -82,27 +78,27 @@ function main() {
         // Vuelvo a llamar, para que se mueva constantemente.
         main();
         // TODO: Agregar selector para ir agregando velocidad.
-    }, 100)
+    }, speed)
 }
 // Limpiamos el lienzo, para eliminiar los rastros dejados por la serpiente.
 function limpiarLienzo() {
 
-    canSnake.fillStyle = 'orange';
-    canSnake.strokeStyle = 'darkgreen';
+    ctx.fillStyle = canvasBackgroundColor;
+    ctx.strokeStyle = canvasBorderColor;
 
-    canSnake.fillRect(0, 0, canvasGame.width, canvasGame.height);
-    canSnake.strokeRect(0, 0, canvasGame.width, canvasGame.height);
+    ctx.fillRect(0, 0, canvasGame.width, canvasGame.height);
+    ctx.strokeRect(0, 0, canvasGame.width, canvasGame.height);
 
 }
 //Dibujamos un rectangulo por cada par de coordenadas - cuerpo de snake.
 function dibujarCuerpoSerpiente(snakeCuerpo) {
     // Damos color y borde a nuestra serpiente.
-    canSnake.fillStyle = snakeBackgroundColor;
-    canSnake.StrokeStyle = snakeBorderColor;
+    ctx.fillStyle = snakeBackgroundColor;
+    ctx.StrokeStyle = snakeBorderColor;
 
     // Dibujamos con las coordenadas que tomamos de snakeCuerpo.
-    canSnake.fillRect(snakeCuerpo.x, snakeCuerpo.y, 10, 10);
-    canSnake.strokeRect(snakeCuerpo.x, snakeCuerpo.y, 10, 10);
+    ctx.fillRect(snakeCuerpo.x, snakeCuerpo.y, 10, 10);
+    ctx.strokeRect(snakeCuerpo.x, snakeCuerpo.y, 10, 10);
 }
 //
 function dibujarSerpiente() {
@@ -114,6 +110,9 @@ function cambiarDireccion(e) {
     const flechaIzquierda = 37;
     const flechaArriba = 38;
     const flechaAbajo = 40;
+    /* Previene que haga reverso. */
+    if (cambiarVelocidad) return;
+    cambiarVelocidad = true;
 
     const teclaPresionada = e.keyCode;
     const yendoDerecha = dx === 10;
@@ -170,9 +169,6 @@ function generarAzar(minimo, maximo) {
 function generarComida() {
     comidaX = generarAzar(0, canvasGame.width - 10);
     comidaY = generarAzar(0, canvasGame.height - 10);
-    console.log(comidaX);
-    console.log(comidaY);
-
     snake.forEach(function laComidaSeCreaEnLaSerpiente(parte) {
         if (comida = parte.x == comidaX && parte.y == comidaY) {
             generarComida();
@@ -181,27 +177,49 @@ function generarComida() {
 }
 
 function dibujarComida() {
-    canSnake.fillStyle = 'red';
-    canSnake.strokeStyle = 'black';
+    ctx.fillStyle = 'orange';
+    ctx.strokeStyle = 'black';
 
 
-    canSnake.fillRect(comidaX, comidaY, 10, 10);
-    canSnake.strokeRect(comidaX, comidaY, 10, 10);
+    ctx.fillRect(comidaX, comidaY, 10, 10);
+    ctx.strokeRect(comidaX, comidaY, 10, 10);
 
 }
-// ADD: Colisión paredes.
+
 function colisionSerpiente() {
     // Chequeo si se choca consigo misma.
     // Empiezo en [4], por que es imposible que se choque con solo 4 partes.
     for (let i = 4; i < snake.length; i++) {
         // Snake[0] es la cabeza, por lo tanto nunca cambia.
         const haChocado = snake[i].x === snake[0].x && snake[i].y === snake[0].y;
-        if(haChocado) return true;
+        if (haChocado) return true;
     }
+    // Chequeo si choca contra las paredes.
+    const chocaParedIzquierda = snake[0].x < 0;
+    const chocaParedDerecha = snake[0].x > canvasGame.width - 10;
+    const chocaParedArriba = snake[0].y < 0;
+    const chocaParedAbajo = snake[0].y > canvasGame.height - 10;
+
+    return chocaParedAbajo || chocaParedArriba || chocaParedDerecha || chocaParedIzquierda;
 }
-// FIXME: Hacer que el inicio funcione correctamente.
+
 function iniciarJuego() {
-    canvasGame.style.display = "block";
+    const jugar = document.querySelector('#jugar-on');
+    const opciones = document.querySelector('#opciones');
+    opciones.style.display = "none";
+    jugar.style.display = "block";
+    // Inicio del juego.
     main();
+    // Genero comida para la primera vez. 
     generarComida();
+
+}
+
+function juegoAcabado() {
+    const fondo = document.querySelector('body');
+    const titulo = document.querySelector('#titulo-juego');
+    const puntaje = document.querySelector('#titulo-puntaje');
+    fondo.style.backgroundColor = 'orange';
+    puntaje.style.display = 'block';
+    titulo.textContent = 'PERDISTE';
 }
