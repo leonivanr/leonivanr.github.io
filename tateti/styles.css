@@ -1,0 +1,31 @@
+.container {
+    margin: 50px auto auto auto;
+    width: 320px;
+    height: 320px;
+    border: 10px solid black;
+}
+.c {
+    width: 100px;
+    height: 100px;
+    float: left;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 100px;
+    line-height: 100px;
+}
+.c:hover {
+    background-color: lightgray;
+}
+#c0, #c1, #c2, #c3, #c4, #c5 {
+    border-bottom: 10px solid black;
+}
+#c1, #c4, #c7 {
+    border-left: 10px solid black;
+    border-right: 10px solid black;
+}
+.ganador {
+    color: green;
+}
