@@ -116,8 +116,8 @@ p.lead {
   }
   #sideNav .navbar-collapse {
     display: flex;
-    align-items: flex-start;
-    flex-grow: 0;
+    /* align-items: flex-center; */
+    /* flex-grow: 0; */
     width: 100%;
     margin-bottom: auto;
   }
