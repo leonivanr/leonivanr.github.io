@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- head -->
+
+<head>
+  <meta charset="utf-8">
+  <title>113° Congress | Senate Loyalty</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="../img/favicon.png" />
+</head>
+<!-- body -->
+
+<body id="senate">
+  <div id="vue-app" class="container mt-4">
+    <!-- Header -->
+    <div class="row">
+      <div class="col-12 col-md-4"><a href="../index.html"><img src="../img/logo.png" class="img-fluid" alt="Logo"></a>
+      </div>
+      <div class="d-none d-md-block col-md-8 text-right"><i class="fas fa-envelope"></i> <a
+          href="emailto:info@tgif.com">info@tgif</a></div>
+    </div>
+    <!-- NavBar -->
+    <div class="row mt-2">
+      <div class="col-md-12">
+        <nav class="navbar navbar-expand-sm bg-light navbar-light border rounded">
+          <!-- Links -->
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="../index.html">Home</a>
+            </li>
+            <!-- Dropdown -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Congress 113
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="../congress/house.html">House</a>
+                <a class="dropdown-item" href="../congress/senate.html">Senate</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Attendance
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="../attendance/house-at.html">House</a>
+                <a class="dropdown-item" href="../attendance/senate-at.html">Senate</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle active" href="#" id="navbardrop" data-toggle="dropdown">
+                Party Loyalty
+              </a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="../loyalty/house-loy.html">House</a>
+                <a class="dropdown-item" href="../loyalty/senate-loy.html">Senate</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                States Legislatures
+              </a>
+              <div class="dropdown-menu big-menu">
+                <div class="container">
+                  <div class="row no-gutters">
+                    <div class='col-12 col-md-3'>
+                      <a href="../legisladores.html?state=al" class="dropdown-item" id="AL">Alabama</a>
+                      <a href="../legisladores.html?state=ak" class="dropdown-item" id="AK">Alaska</a>
+                      <a href="../legisladores.html?state=as" class="dropdown-item" id="AS">American
+                        Samoa</a>
+                      <a href="../legisladores.html?state=az" class="dropdown-item" id="AZ">Arizona</a>
+                      <a href="../legisladores.html?state=ar" class="dropdown-item" id="AR">Arkansas</a>
+                      <a href="../legisladores.html?state=ca" class="dropdown-item" id="CA">California</a>
+                      <a href="../legisladores.html?state=co" class="dropdown-item" id="CO">Colorado</a>
+                      <a href="../legisladores.html?state=ct" class="dropdown-item" id="CT">Connecticut</a>
+                      <a href="../legisladores.html?state=de" class="dropdown-item" id="DE">Delaware</a>
+                      <a href="../legisladores.html?state=fl" class="dropdown-item" id="FL">Florida</a>
+                      <a href="../legisladores.html?state=ga" class="dropdown-item" id="GA">Georgia</a>
+                      <a href="../legisladores.html?state=gu" class="dropdown-item" id="GU">Guam</a>
+                      <a href="../legisladores.html?state=hi" class="dropdown-item" id="HI">Hawaii</a>
+                      <a href="../legisladores.html?state=ia" class="dropdown-item" id="IA">Iowa</a>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <a href="../legisladores.html?state=id" class="dropdown-item" id="ID">Idaho</a>
+                      <a href="../legisladores.html?state=il" class="dropdown-item" id="IL">Illinois</a>
+                      <a href="../legisladores.html?state=in" class="dropdown-item" id="IN">Indiana</a>
+                      <a href="../legisladores.html?state=ks" class="dropdown-item" id="KS">Kansas</a>
+                      <a href="../legisladores.html?state=ky" class="dropdown-item" id="KY">Kentucky</a>
+                      <a href="../legisladores.html?state=la" class="dropdown-item" id="LA">Lousiana</a>
+                      <a href="../legisladores.html?state=ma" class="dropdown-item" id="MA">Massachusetts</a>
+                      <a href="../legisladores.html?state=md" class="dropdown-item" id="MD">Maryland</a>
+                      <a href="../legisladores.html?state=me" class="dropdown-item" id="ME">Maine</a>
+                      <a href="../legisladores.html?state=mi" class="dropdown-item" id="MI">Michigan</a>
+                      <a href="../legisladores.html?state=mn" class="dropdown-item" id="MN">Minnesota</a>
+                      <a href="../legisladores.html?state=mo" class="dropdown-item" id="MO">Missouri</a>
+                      <a href="../legisladores.html?state=mp" class="dropdown-item" id="MP">Mariana
+                        Islands</a>
+                      <a href="../legisladores.html?state=ms" class="dropdown-item" id="MS">Mississippi</a>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <a href="../legisladores.html?state=mt" class="dropdown-item" id="MT">Montana</a>
+                      <a href="../legisladores.html?state=nc" class="dropdown-item" id="NC">North
+                        Calorina</a>
+                      <a href="../legisladores.html?state=nd" class="dropdown-item" id="ND">North Dakota</a>
+                      <a href="../legisladores.html?state=ne" class="dropdown-item" id="NE">Nebraska</a>
+                      <a href="../legisladores.html?state=nh" class="dropdown-item" id="NH">New
+                        Hampshire</a>
+                      <a href="../legisladores.html?state=nj" class="dropdown-item" id="NJ">New Jersey</a>
+                      <a href="../legisladores.html?state=nm" class="dropdown-item" id="NM">New Mexico</a>
+                      <a href="../legisladores.html?state=nv" class="dropdown-item" id="NV">Nevada</a>
+                      <a href="../legisladores.html?state=ny" class="dropdown-item" id="NY">New York</a>
+                      <a href="../legisladores.html?state=oh" class="dropdown-item" id="OH">Ohio</a>
+                      <a href="../legisladores.html?state=ok" class="dropdown-item" id="OK">Oklahoma</a>
+                      <a href="../legisladores.html?state=or" class="dropdown-item" id="OR">Oregon</a>
+                      <a href="../legisladores.html?state=pa" class="dropdown-item" id="PA">Pennsylvania</a>
+                      <a href="../legisladores.html?state=pr" class="dropdown-item" id="PR">Puerto Rico</a>
+                    </div>
+                    <div class="col-12 col-md-3">
+                      <a href="../legisladores.html?state=ri" class="dropdown-item" id="RI">Rhode Island</a>
+                      <a href="../legisladores.html?state=sc" class="dropdown-item" id="SC">South
+                        Carolina</a>
+                      <a href="../legisladores.html?state=sd" class="dropdown-item" id="SD">South Dakota</a>
+                      <a href="../legisladores.html?state=tn" class="dropdown-item" id="TN">Tennessee</a>
+                      <a href="../legisladores.html?state=tx" class="dropdown-item" id="TX">Texas</a>
+                      <a href="../legisladores.html?state=ut" class="dropdown-item" id="UT">Utah</a>
+                      <a href="../legisladores.html?state=va" class="dropdown-item" id="VA">Virginia</a>
+                      <a href="../legisladores.html?state=vi" class="dropdown-item" id="VI">Virgin
+                        Islands</a>
+                      <a href="../legisladores.html?state=vt" class="dropdown-item" id="VT">Vermont</a>
+                      <a href="../legisladores.html?state=wa" class="dropdown-item" id="WA">Washington</a>
+                      <a href="../legisladores.html?state=wi" class="dropdown-item" id="WI">Wisconsin</a>
+                      <a href="../legisladores.html?state=wv" class="dropdown-item" id="WV">West
+                        Virginia</a>
+                      <a href="../legisladores.html?state=wy" class="dropdown-item" id="WY">Wyoming</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!-- Loyalty Content-->
+    <div class="row mt-4 px-2">
+      <!-- Text -->
+      <div class="col-md-7">
+        <h2>Party Loyalty</h2>
+        <p class="text-justify">Those who consider themselves to be strong partisans, strong Democrats and strong
+          Republicans respectively, tend to be the most faithful in voting for their party's nominee for office and
+          legislation that backs their party's agenda. </p>
+      </div>
+      <!-- table -->
+      <div id='senate' class="col-md-5">
+        <div class="card card-body bg-light py-3">
+          <h4 class="my-0">Senate at a glance</h4>
+        </div>
+        <div id="cargando" class="" v-show='loading'>
+          <img src="../img/loader.gif" alt="Cargando" class="ml-5">
+        </div>
+        <table id="total-members" class="table table-hover mt-4" v-show='show'>
+          <thead class="thead-light">
+            <tr>
+              <th>Party</th>
+              <th>Members</th>
+              <th>Votes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Democrats</td>
+              <td>{{numberOfDemocrats}}</td>
+              <td>{{averageVotesDemocrats}} %</td>
+            </tr>
+            <tr>
+              <td>Republicans</td>
+              <td>{{numberOfRepublicans}}</td>
+              <td>{{averageVotesRepublicans}} %</td>
+            </tr>
+            <tr v-show="averageVotesIndependents > 0">
+              <td>Independents</td>
+              <td>{{numberOfIndependents}}</td>
+              <td>{{averageVotesIndependents}} %</td>
+            </tr>
+            <tr>
+              <td>Total</td>
+              <td>{{totalMembers}}</td>
+              <td>{{averageVotesAll}} %</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <hr>
+    <div class="alert alert-danger col-12 mt-2" v-show='alerta'>
+      <strong><i class="fas fa-exclamation-triangle"></i> Cannot retrieve information from API.</strong> Try
+      again in a few
+      seconds.
+    </div>
+    <!-- 2 & 3 tables -->
+    <div class="row mt-4 px-2" v-show='show'>
+      <!-- Left Table -->
+      <div class="col-md-6">
+        <div class="card card-body text-center bg-light py-3">
+          <h4 class="my-0">Least Loyal (Bottom 10% of Party)</h4>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover mt-4">
+            <thead class="thead-light">
+              <tr>
+                <th>Name</th>
+                <th>Votes</th>
+                <th>Votes %</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="member of leastLoyal">
+                <td><a :href="member.url">{{member.last_name}}, {{member.first_name}} {{member.middle_name}}</a></td>
+                <td>{{member.total_votes}}</td>
+                <td>{{member.votes_with_party_pct}} %</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Right Table -->
+      <div class="col-md-6">
+        <div class="card card-body text-center bg-light py-3">
+          <h4 class="my-0">Most Loyal (Top 10% of Party)</h4>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover mt-4">
+            <thead class="thead-light">
+              <tr>
+                <th>Name</th>
+                <th>Votes</th>
+                <th>Votes %</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="member of mostLoyal">
+                <td><a :href="member.url">{{member.last_name}}, {{member.first_name}} {{member.middle_name}}</a></td>
+                <td>{{member.total_votes}}</td>
+                <td>{{member.votes_with_party_pct}} %</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Footer -->
+    <div class="container">
+      <div class="row mt-2">
+        <p class="card card-body text-center bg-light">© 2016 TGIF | All rights reserved</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <!-- Links JavaScript -->
+  <script src="../js/app.js"></script>
+</body>
+
+</html>
